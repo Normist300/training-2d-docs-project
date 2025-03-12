@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
+var end_video = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,7 +18,8 @@ func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
-	$Music.stop()
+	end_video = $VideoStreamPlayer.get_stream_length()
+	$VideoStreamPlayer.stop()
 	$DeathSound.play()
 
 func new_game():
@@ -27,7 +29,11 @@ func new_game():
 	$HUD.show_message("Get Ready")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
-	$Music.play() 
+	var divider = $Player/AnimationPlayer.get_playing_speed()
+	var start_video = floor(end_video / divider) - 10
+	start_video *= divider
+	$VideoStreamPlayer.stream_position = start_video
+	$VideoStreamPlayer.play()
 
 func _on_mob_timer_timeout() -> void:
 	# Create a new instance of the Mob scene.

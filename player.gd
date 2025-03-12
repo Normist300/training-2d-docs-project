@@ -25,19 +25,6 @@ func _process(delta: float) -> void:
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite2D.play()
-	else:
-		$AnimatedSprite2D.stop()
-	
-	# Animation
-	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		# See the note below about the following boolean assignment.
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "up"
-		$AnimatedSprite2D.flip_v = velocity.y > 0
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
@@ -52,4 +39,5 @@ func _on_body_entered(body: Node2D) -> void:
 func start(pos):
 	position = pos
 	show()
+	$AnimationPlayer.play("dance")
 	$CollisionShape2D.disabled = false
