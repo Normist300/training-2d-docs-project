@@ -2,12 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsuca1d4xcck5" path="res://hud.gd" id="1_64ctp"]
 [ext_resource type="FontFile" uid="uid://c72ujtremdqfc" path="res://fonts/Xolonium-Regular.ttf" id="2_8sq4i"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_64ctp"]
-font = ExtResource("2_8sq4i")
-font_size = 64
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="LabelSettings" uid="uid://bok3715wtlu2f" path="res://fonts/new_label_settings.tres" id="3_8sq4i"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_64ctp")
@@ -23,7 +18,7 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_8sq4i")
 theme_override_font_sizes/font_size = 64
 text = "0"
-label_settings = SubResource("LabelSettings_64ctp")
+label_settings = ExtResource("3_8sq4i")
 horizontal_alignment = 1
 
 [node name="Message" type="Label" parent="."]
@@ -42,6 +37,7 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_8sq4i")
 theme_override_font_sizes/font_size = 64
 text = "Набери 20 очков"
+label_settings = ExtResource("3_8sq4i")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
