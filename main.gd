@@ -6,12 +6,21 @@ var end_video = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	YandexSDK.init_game()
+	YandexSDK.game_ready()
+	get_window().focus_entered.connect(_focus_in)
+	get_window().focus_exited.connect(_focus_out)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func _focus_in():
+	YandexSDK.gameplay_started()
+	
+func _focus_out():
+	YandexSDK.gameplay_stopped()
 
 
 func game_over() -> void:
@@ -21,6 +30,8 @@ func game_over() -> void:
 	end_video = $VideoStreamPlayer.get_stream_length()
 	$VideoStreamPlayer.stop()
 	$DeathSound.play()
+	YandexSDK.gameplay_stopped()
+	YandexSDK.show_interstitial_ad()
 
 func new_game():
 	get_tree().call_group("mobs", "queue_free")
@@ -34,6 +45,7 @@ func new_game():
 	start_video *= divider
 	$VideoStreamPlayer.stream_position = start_video
 	$VideoStreamPlayer.play()
+	YandexSDK.gameplay_started()
 
 func _on_mob_timer_timeout() -> void:
 	# Create a new instance of the Mob scene.

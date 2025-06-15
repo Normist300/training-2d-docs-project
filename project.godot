@@ -15,11 +15,19 @@ run/main_scene="uid://g3yvpveiyhy7"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+YandexSDK="*res://addons/godot-yandex-games-sdk/yandex_sdk.gd"
+
 [display]
 
 window/size/viewport_width=980
 window/size/viewport_height=736
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-yandex-games-sdk/plugin.cfg")
 
 [input]
 
